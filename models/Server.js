@@ -1,10 +1,10 @@
 require('dotenv').config({ path: '.env' })
 const express = require('express')
 const cors = require('cors')
-const DB = require('../helpers/db.helper')
+const DB = require('../helpers/DB')
 
 class Server {
-    constructor(){
+    constructor() {
         this.app = express()
         this.port = process.env.PORT || 8080
         // path 
@@ -13,20 +13,20 @@ class Server {
     listen() {
         DB.connect().then(() => {
             this.middlewares()
-    
+
             //this.routes()
-    
+
             this.app.listen(this.port, () => {
                 console.log('Server listening on', this.port)
             })
         })
     }
-    
+
     middlewares() {
         this.app.use(cors())
-        this.app.use(express.json({ extended: true}))
+        this.app.use(express.json({ extended: true }))
     }
-    
+
     //routes(){}
 }
 
